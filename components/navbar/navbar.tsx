@@ -29,6 +29,13 @@ export const Navbar = () => {
   return (
     <nav className=" bg-black">
       <div className="max-w-[1110px] flex justify-between items-center p-4 text-white m-auto">
+        <Image
+            className="sm:hidden"
+            src="/assets/shared/tablet/icon-hamburger.svg"
+            alt="Menu"
+            width={24}
+            height={24}
+          />
         <Link href={'/'}>
           <Image
             src="/assets/shared/desktop/logo.svg"
@@ -37,7 +44,7 @@ export const Navbar = () => {
             height={50}
           />
         </Link>
-        <ul className="flex gap-[34px]">
+        <ul className="hidden sm:flex sm:gap-[34px]">
           {navItems.map(item => (
             <li key={item.path}>
               <Link className="uppercase" href={item.path}>
