@@ -47,7 +47,7 @@ export const Navbar = () => {
         <ul className="hidden sm:flex sm:gap-[34px]">
           {navItems.map(item => (
             <li key={item.path}>
-              <Link className="uppercase" href={item.path}>
+              <Link className="uppercase hover:text-Orange" href={item.path}>
                 {item.text}
               </Link>
             </li>
