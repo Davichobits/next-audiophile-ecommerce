@@ -1,5 +1,8 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
+import { ActiveLink } from "../../components";
+import { useState } from "react";
 
 interface INavItems {
   path: string;
@@ -26,16 +29,21 @@ const navItems: INavItems[] = [
 ]
 
 export const Navbar = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <nav className=" bg-black">
       <div className="max-w-[1110px] flex justify-between items-center p-4 text-white m-auto">
-        <Image
-            className="sm:hidden"
-            src="/assets/shared/tablet/icon-hamburger.svg"
-            alt="Menu"
-            width={24}
-            height={24}
-          />
+        <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden">
+          <Image
+              className="sm:hidden"
+              src="/assets/shared/tablet/icon-hamburger.svg"
+              alt="Menu"
+              width={24}
+              height={24}
+            />
+          </button>
         <Link href={'/'}>
           <Image
             src="/assets/shared/desktop/logo.svg"
@@ -44,15 +52,19 @@ export const Navbar = () => {
             height={50}
           />
         </Link>
-        <ul className="hidden sm:flex sm:gap-[34px]">
-          {navItems.map(item => (
-            <li key={item.path}>
-              <Link className="uppercase hover:text-Orange" href={item.path}>
-                {item.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {
+          isOpen && (
+            <div className="sm:hidden absolute top-13 left-0 right-0 bg-black p-4">
+              <ul className="flex flex-col gap-4">
+                {navItems.map(item => (
+                  <li key={item.path}>
+                    <ActiveLink {...item} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
         <Link href={'/cart'}>
           <Image
             src="/assets/shared/desktop/icon-cart.svg"
